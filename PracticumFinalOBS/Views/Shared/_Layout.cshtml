@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @RenderSection("head",required:false)
+    @RenderSection("zoom",required:false)
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PracticumFinalOBS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="~/lib/icofont/icofont.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#052f34;">
+  <a class="navbar-brand" asp-controller="Home" asp-action="Index">Online Book Store</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+         @if (!User.IsInRole("Admin") && !User.IsInRole("Vendor") && !User.IsInRole("Customer"))
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-primary" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Vendors" asp-action="Create">Apply As A Vendor</a>
+                        </li>   
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Memberships" asp-action="Index">Our Subscriptions</a>
+                        </li>
+                        
+      }
+      @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-primary" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage Admins
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Admins" asp-action="Index">View Admins</a>
+                                <a class="dropdown-item" asp-controller="Admins" asp-action="Create">Add New Admin</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Admins" asp-action="CreateRole">Add Role</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Memberships
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                 <a class="dropdown-item" asp-controller="Memberships" asp-action="Index">Existing Membership Types</a>
+                                <a class="dropdown-item" asp-controller="Memberships" asp-action="Create">Add New Membership</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               Vendors
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                 <a class="dropdown-item" asp-controller="Vendors" asp-action="ApprovedVendors">Verified Vendors</a>
+                                <a class="dropdown-item" asp-controller="Vendors" asp-action="PendingVendors">Pending Vendors</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Catagories" asp-action="Create">Catagory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Orders" asp-action="Index">Pending Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Onlines" asp-action="Create">Add E-Book</a>
+                        </li>
+                    }
+                     @if (User.IsInRole("Customer"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Memberships" asp-action="Index">Buy Subscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Onlines" asp-action="Index">E-Books</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Vendor"))
+                    {
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" asp-controller="Books" asp-action="Create" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Books
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="Index">Books</a>
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Create">Add New Book</a>
+                                    
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Vendors" asp-action="Inventory">Inventory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Vendors" asp-action="Sale">Sell List</a>
+                            </li>
+                    }
+                </ul>
+
+    <div class="form-inline my-2 my-lg-0">
+        <a class="btn btn-primary btn-lg" class="btn btn-primary ml-4" asp-controller="books" asp-action="showcart">
+             <i class="icofont-cart-alt"></i>
+        </a>
+        <partial name="_LoginPartial" />
+    </div>
+  </div>
+</nav>
+
+@*
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PracticumFinalOBS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        @if(!User.IsInRole("Admin") && !User.IsInRole("Vendor") && !User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendors" asp-action="Create">Apply As A Vendor</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-lg" class="btn btn-primary" asp-controller="books" asp-action="showcart">
+                                <i class="icofont-cart-alt"></i>
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Admins
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Admins" asp-action="Index">View Admins</a>
+                                <a class="dropdown-item" asp-controller="Admins" asp-action="Create">Add New Admin</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="CreateRole">Add Role</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Memberships
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Memberships" asp-action="Index">Existing Membership Types</a>
+                                <a class="dropdown-item" asp-controller="Memberships" asp-action="Create">Add New Membership</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Vendors
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Vendors" asp-action="ApprovedVendors">Verified Vendors</a>
+                                <a class="dropdown-item" asp-controller="Vendors" asp-action="PendingVendors">Pending Vendors</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Catagories" asp-action="Create">Catagory</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Pending Orders</a>
+                            </li>
+                            
+
+                        }
+                        @if(User.IsInRole("Vendor"))
+                        {
+                       
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" asp-controller="Books" asp-action="Create" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Books
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Index">Books</a>
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Create">Add New Book</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendors" asp-action="Inventory">Inventory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendors" asp-action="Sale">Sell List</a>
+                            </li>
+                        }
+                        @if(User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Memberships" asp-action="Index">Buy Subscription</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-lg" class="btn btn-primary" asp-controller="books" asp-action="showcart">
+                                <i class="icofont-cart-alt"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+    </header>
+    <div class="container">
+        <main role="main" class="py-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - PracticumFinalOBS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+

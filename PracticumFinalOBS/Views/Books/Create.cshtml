@@ -1,0 +1,103 @@
+﻿@model PracticumFinalOBS.Models.Book
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4 class="display-4 text-center">Add A New Book</h4>
+<div class="container"> <div class=" text-center mt-4 ">
+        
+    </div>
+    <div class="row ">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+                    <div class="container">
+                        <form asp-action="Create" method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group"></div>
+                                    <label asp-for="BookName" class="control-label ">Book Name:</label>
+                                    <input asp-for="BookName" class="form-control" placeholder="Enter book name."/>
+                                    <span asp-validation-for="BookName" class="text-danger"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                           <label asp-for="AuthorName" class="control-label">Name of Author:</label>
+                                    <input asp-for="AuthorName" class="form-control" placeholder="Enter author's name"/>
+                                    <span asp-validation-for="AuthorName" class="text-danger"></span> </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label> Publication Name:</label>
+                                            <input asp-for="Publication" class="form-control" placeholder="Enter Publication Name."> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Number of Items:</label>
+                                            <input  asp-for="NOB" class="form-control" placeholder="Enter number of items"> </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CatagoryId" class="control-label ">Genre:</label>
+                                            <select asp-for="CatagoryId" class="form-control" asp-items="ViewBag.CatagoryId"></select>
+                                           </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Image" class="control-label "></label>
+                                            <input asp-for="Image" type="file" class="form-control" placeholder="Select an Image"/>
+                                            <span asp-validation-for="Image" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-6">
+                                       <label asp-for="Price" class="control-label "></label>
+                                       <input asp-for="Price" class="form-control" placeholder="Price for individual books" />
+                                       <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"> <label>Description</label> <textarea asp-for="BookDescription" class="form-control" id="exampleFormControlTextarea4" rows="4" placeholder="Enter Description"></textarea> </div>
+                                    </div>
+                                    <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="Add Book"> </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- /.8 -->
+        </div> <!-- /.row-->
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(184 196 209);
+            background: linear-gradient(90deg, rgb(206 210 213) 0%, rgb(223 255 230) 28%, #96c5cd 51%, rgb(203 199 199) 73%, rgb(178 177 209) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

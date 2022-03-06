@@ -1,0 +1,209 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Book>
+
+@{
+    ViewData["Title"] = "showcart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double total = 0;
+    double dis = ViewBag.Discount;
+    double rate = dis / 100;
+    //var x = HttpContext.Session.GetObject<Cart>("mycart");
+
+   
+}
+
+<h4 class="display-4 text-center text-white";">Shopping Cart</h4><br/><br/>
+
+@if(Model!=null){
+<table class="table border-left border-right table-hover text-white">
+    <thead class="text-center table-hover table-active" style="background-color:#000001">
+        <tr>
+            <th>
+               @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publication)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Sub-Total
+            </th>
+            <th>
+                Update Cart
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class='text-center'>
+            <td class="text-info">
+                <b> @Html.DisplayFor(modelItem => item.BookName) </b>
+            </td>
+           
+            <td>
+                <img src="~/Books/@item.Image" style="width:140px; height:200px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publication)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td style="text-align:right">
+                    @{
+                        double subtotal = item.Price * item.Quantity.Value;
+                        total += subtotal;
+                    }
+                    @subtotal
+            </td>
+            <td>
+                <button type="submit" class="btn btn-danger btn-sm btnrm" data-pid="@item.Id">Remove</button>
+                <button type="submit" class="btn btn-warning btn-sm btnd" data-plusminus = "2" data-pid="@item.Id"> - </button>
+                <button type="submit" class="btn btn-success btn-sm btni" data-plusminus="1" data-pid="@item.Id"> + </button>
+            </td>
+        </tr>
+}
+<tr style="background-color:#000001">
+    <td colspan="5"></td>
+    <td colspan="1"><b>TOTAL:</b></td>
+    <td colspan="1" >@total</td>
+</tr>
+<tr style="background-color:#000001">
+    <td colspan="5"></td>
+    <td colspan="1"><b>Total After Discount:</b></td>
+    
+    <td colspan="1">
+                    @{
+                        double z = total*rate;
+                        double distotal = total - z;
+                    }
+                    @distotal
+        </td>
+</tr>
+
+    </tbody>
+</table>
+<a class="btn btn-primary" asp-controller="Orders" asp-action="Create">Check Out</a>
+}
+else
+{
+<h4 class='display-4 text-white'> Sorry! Shopping cart is currently empty</h4>
+
+}
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+
+            //button remove
+            $(".btnrm").click(function(){
+                let tid = $(this).data('pid');
+                alert('PID: ' + tid);
+                $.ajax({
+                    url: '/Books/RemoveFromCart',
+                    cache:false,
+                    type:'POST',
+                    data:{ 'pid' : tid},
+                    dataType:'JSON',
+                    success: function(response){
+                        if(response.flag=='1'){
+                            window.location.reload();
+                            //alert(response.msg);
+                        }
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+
+                });
+                });
+
+
+                ////Button Increase
+                $(".btni").click(function(){
+                let tid = $(this).data('pid');
+                let pm = $(this).data('plusminus');
+                alert('PID: ' + tid + ' PlusMinus: ' + pm);
+                
+                $.ajax({
+                    url: '/Books/ChangeQuantity',
+                    cache:false,
+                    type:'POST',
+                    data:{ 'pid' : tid , 'plusminus' : pm},
+                    dataType:'JSON',
+                    success: function(response){
+                        if(response.flag=='1'){
+                            window.location.reload();
+                            alert(response.msg);
+                        }
+                        else{
+                        alert('Message: ' + response.msg);
+                    }
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+
+                });
+                }); 
+
+                // Button Decrease Quantity
+                $(".btnd").click(function(){
+                    let tid = $(this).data('pid');
+                    let pm = $(this).data('plusminus');
+                    alert("PID: "+ tid + " PlusMinus : " + pm)
+
+                    $.ajax({
+                        url:'/Books/ChangeQuantity',
+                        cache: false,
+                        type:'POST',
+                        data: { 'pid' : tid , 'plusminus' : pm},
+                        dataType: 'JSON',
+                        success: function(response){
+                            if(response.flag =='1'){
+                                window.location.reload();
+                                alert(response.msg);
+                            }
+                        },
+                        error: function(err){
+                            console.log(err);
+                        }
+                    });
+                });
+                });
+
+
+                
+       
+    </script>
+}
+
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(49,137,228);
+            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;   
+        }
+    </style>
+}

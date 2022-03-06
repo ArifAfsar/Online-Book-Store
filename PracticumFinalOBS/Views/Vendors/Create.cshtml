@@ -1,0 +1,132 @@
+﻿@model PracticumFinalOBS.Models.Vendor
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h4 class="display-4 text-center alert alert-primary">Vendor Registration</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VendorName" class="control-label"></label>
+                <input asp-for="VendorName" class="form-control" />
+                <span asp-validation-for="VendorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorEmail" class="control-label"></label>
+                <input asp-for="VendorEmail" class="form-control" />
+                <span asp-validation-for="VendorEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorPassword" class="control-label"></label>
+                <input asp-for="VendorPassword" class="form-control" />
+                <span asp-validation-for="VendorPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorPhone" class="control-label"></label>
+                <input asp-for="VendorPhone" class="form-control" />
+                <span asp-validation-for="VendorPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorCompany" class="control-label"></label>
+                <input asp-for="VendorCompany" class="form-control" />
+                <span asp-validation-for="VendorCompany" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5 display-4"><small>Apply As Vendor</small></h2>
+
+              <form asp-action="Create">
+                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="VendorName" class="form-control form-control-lg" placeholder="Enter Your Name" />
+                      <span asp-validation-for="VendorName" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="VendorEmail" class="form-control form-control-lg" placeholder="Enter Email Address" />
+                      <span asp-validation-for="VendorEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="VendorPassword" class="form-control form-control-lg" placeholder="Please Insert a Password" />
+                      <span asp-validation-for="VendorPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="ConfirmPassword" class="form-control form-control-lg" placeholder="Re-Enter Password" />
+                      <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="VendorPhone" class="form-control form-control-lg" placeholder="Enter active phone number" />
+                      <span asp-validation-for="VendorPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="DOB" class="form-control form-control-lg" placeholder="Date of Birth" />
+                      <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input asp-for="VendorCompany" class="form-control form-control-lg" placeholder="Enter Your Company Name(Optional)" />
+                      <span asp-validation-for="VendorCompany" class="text-danger"></span>
+                    </div>
+
+                
+
+                <div class="d-flex justify-content-center">
+                  <input  type="submit" value="Register" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"/>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/Identity/Account/Login" class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@section head{
+    <style type="text/css">
+         body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgb(225 225 225) 0%, rgb(27 94 126) 35%, #251f48 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

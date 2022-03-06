@@ -1,0 +1,158 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@if (Model.Any())
+{
+    <h4 class="text-center display-4 text-white">Our Products</h4>    
+    <form asp-action="Index" method="get" class="form-inline d-inline-block w-100" id="form">
+        <div class="row">
+        
+        <div class="col-md-4">
+            <input class="form-control w-100" style="min-width:250px;" type="text" placeholder="What are you looking for?" name="booksrch" value="@ViewBag.book"/>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+
+          <div class="col-md-4">
+                        <select class="form-control float-right" name="catagory" onchange="this.form.submit();">
+            <option select value=""> Select a catagory</option>
+            @foreach (var z in ViewBag.cat)
+            {
+                <option value="@z">@z</option>
+            }
+                </select>  
+            </div>
+        </div>
+
+     <br/>   
+       
+    </form>
+    
+    
+
+    <div class="row w-100 m-0">
+        
+
+        @foreach (var item in Model)
+        {
+
+            <div class="card m-2 zoom" style="width:16rem; height:36rem; background-color:rgb(0 0 0 / 40%);">
+                <img class="card-img-top" src="~/Books/@item.Image" style="width:250px; height:340px;" alt="Card image cap">
+                <div class="card-body">
+                    <div class="row" style="height:70px;">                 
+                         <h5 class="card-title text-white">@item.BookName</h5>
+                         
+                    </div>
+                    <div class="row" style="height:20px;">                 
+                         
+                         <p class="text-white"><b>Price: </b>@item.Price BDT</p>
+                    </div>
+                    
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <button class="btn btn-primary btnatc" data-pid="@item.Id" data-qty="1">Add To Cart</button>
+                        </div>
+                        <div class="col-md-6">
+                            <a asp-controller="Books" asp-action="Details" asp-route-id ="@item.Id" class="card-link btn btn btn-warning">Details</a>
+                        </div>
+                    </div>
+                    
+                </div>
+               
+            </div>
+        }
+    </div>
+}
+else
+{
+     <h4 class="text-center display-4 alert alert-info">Our Products</h4>    
+    <form asp-action="Index" method="get" class="form-inline" id="form">
+        <div>
+            <input class="form-control" style="width:250px;" type="text" placeholder="What are you looking for?" name="booksrch" value="@ViewBag.book"/>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        <select class="form-control" name="catagory" onchange="this.form.submit();">
+            <option select value=""> Select a catagory</option>
+            @foreach (var z in ViewBag.cat)
+            {
+                <option value="@z">@z</option>
+            }
+        </select>  
+    </form>
+    <br/>
+    <h4 class="display-4 text-danger"> Sorry!!! No Item Matches the Search Results</h4>
+}
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(49,137,228);
+/*            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);*/
+            background: linear-gradient(90deg, rgb(4 14 30) 0%, rgb(11 22 30) 28%, rgb(1 24 44) 51%, rgb(0 45 66) 73%, rgb(7 83 86) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;   
+        }
+    </style>
+}
+
+@section zoom{
+    <style type="text/css">
+       .zoom {
+  
+  transition: transform .15s;
+  box-shadow: 0px 3px 2px .5px #97CCD5;
+  margin: 0 auto;
+}
+    .zoom:hover {
+     -ms-transform: scale(1.2); /* IE 9 */
+     -webkit-transform: scale(1.2); /* Safari 3-8 */
+     transform: scale(1.05); 
+}
+    </style>
+}
+
+@section Scripts{
+    <script>
+
+    $(document).ready(function(){
+       
+
+        $('.btnatc').click(function(){
+            let id = $(this).data('pid');
+            let qt = $(this).data('qty');
+            console.log('PID:' + id + '  Qty:' + qt);
+            //alert('PID:' + id + '  Qty:' + qt);
+            
+            $.ajax({
+                url:'/Books/AddToCart',
+                type:'POST',
+                cache:false,
+                dataType:'JSON',
+                data:{pid: id, qty: qt},
+                success:function(response){
+                    if(response.flag=='1'){
+                        alert('Message: '+ response.msg);
+                    }
+                    else{
+                        alert('Message: ' + response.msg);
+                    }
+                },
+                error: function(err){
+                    console.log('Error : ');
+                }
+            });
+        });
+    });
+    </script>
+}

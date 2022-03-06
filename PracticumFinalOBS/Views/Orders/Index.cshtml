@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4 text-center" > Pending Orders</h1>
+<br/>
+<br/>
+
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BkashNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingAddress)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BkashNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingAddress)
+            </td>
+           
+            <td>
+                
+                <a asp-action="Details" class="btn btn-primary" asp-route-cid="@item.CustomerId"> View Details</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(184 196 209);
+            background: linear-gradient(90deg, rgb(206 210 213) 0%, rgb(223 255 230) 28%, #96c5cd 51%, rgb(203 199 199) 73%, rgb(178 177 209) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

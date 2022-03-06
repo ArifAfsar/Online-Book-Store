@@ -1,0 +1,24 @@
+﻿@model PracticumFinalOBS.Models.Vendor;
+@{
+    ViewData["Title"] = "ReviewVendors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4 alert alert-info">Review Update</h1>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+
+        <h4 class="text-primary"> Vendor @Model.VendorName has been approved successfully</h4>
+        <br/>
+        <p class="text-white">The Vendor Can Do business now using our application.</p>
+        <br/><br/>
+        <a asp-action="PendingVendors" class="btn btn-primary">Back To List</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+    </div>
+</div>
+

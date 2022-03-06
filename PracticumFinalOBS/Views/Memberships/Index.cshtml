@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Membership>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="display-4 text-center text-warning">Our Exclusive Memberships</h4>
+
+<br/>
+<br/>
+<table class="table table-hover table-active">
+    <thead class="bg-info">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DurationInDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-white">
+                @Html.DisplayFor(modelItem => item.MembershipName)
+            </td>
+            <td class="text-white">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="text-white">
+                @Html.DisplayFor(modelItem => item.DurationInDays)
+            </td>
+            <td class="text-white">
+                @Html.DisplayFor(modelItem => item.DiscountRate)
+            </td>
+            <td class="text-white">
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td class="text-white">
+                @if(User.IsInRole("Customer"))
+                {
+                        <a asp-controller="Customers" asp-action="BuyMembership" class="btn btn-success" asp-route-id="@item.Id">Buy Subscription</a>
+                }
+                @if(User.IsInRole("Admin"))
+                {
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info m-1">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                }
+  
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section head{
+    <style type="text/css">
+         body {
+            background: rgb(184 196 209);
+            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

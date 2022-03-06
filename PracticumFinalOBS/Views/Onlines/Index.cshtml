@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Online>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="display-4 text-center text-white">Our E-Books</h4>
+<div class="row w-100 m-0">
+        @foreach (var item in Model) {
+        <div class="card m-2 zoom justify-content-center" style="width:16rem; height:31rem; background-color:rgb(0 0 0 / 50%);">
+                <img class="card-img-top" src="~/EBook/@item.Image" style="width:250px; height:340px;" alt="Card image cap">
+                <div class="card-body ">
+                    <div class="row" style="height:40px;">                 
+                         <h5 class="card-title text-white">@item.Name</h5>
+                         
+                    </div>
+                    <div class="row" style="height:15px;">                 
+                         
+                         <p class="text-white"><b>Author: </b>@item.Author</p>
+                    </div>
+                    
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6 align-items-center">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn" style="background-color:#0196A1">Read Online</a>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+}
+    </div>
+
+
+  
+  @section head{
+    <style type="text/css">
+        body {
+            background: rgb(49,137,228);
+            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);           
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;   
+        }
+    </style>
+}              

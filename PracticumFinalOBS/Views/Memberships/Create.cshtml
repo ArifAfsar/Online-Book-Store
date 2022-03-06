@@ -1,0 +1,55 @@
+﻿@model PracticumFinalOBS.Models.Membership
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h4 class="display-4 bg-info text-center">Add New Membership</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MembershipName" class="control-label"></label>
+                <input asp-for="MembershipName" class="form-control" />
+                <span asp-validation-for="MembershipName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DurationInDays" class="control-label"></label>
+                <input asp-for="DurationInDays" class="form-control" />
+                <span asp-validation-for="DurationInDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountRate" class="control-label"></label>
+                <input asp-for="DiscountRate" class="form-control" />
+                <span asp-validation-for="DiscountRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fee" class="control-label">Fee of Subscription:</label>
+                <input asp-for="Fee" class="form-control" />
+                <span asp-validation-for="Fee" class="text-danger"></span>
+            </div><br/>
+            <div class="form-group">
+                <input type="submit" value="Add Membership" class="btn btn-success form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-info">Existing Memberships</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

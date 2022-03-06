@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Vendor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h8 class="display-4 ">Pending Vendor List</h8>
+<br/><br/>
+<br/><br/>
+@if(Model.Any()){
+<table class="table table-hover table-active">
+    <thead class="bg-info">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorCompany)
+            </th>
+            <th>
+                Current Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            if (item.Status == false)
+            {
+             <tr>
+             <td >
+                @Html.DisplayFor(modelItem => item.VendorName)
+            </td>            
+            <td >
+                @Html.DisplayFor(modelItem => item.VendorPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorCompany)
+            </td>
+            <td class="text-danger">Pending
+                    </td>
+            <td>
+              
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a> |
+                <a asp-action="ReviewVendors" asp-route-id="@item.Id" class="btn btn-success btn-sm">Approve</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Reject</a>
+            </td>
+        </tr>
+        }
+}
+    </tbody>
+</table>
+}
+else
+{
+    <h6 class="text-primary">No Pending Requests to be approved!!!</h6>
+}
+
+@section head{
+    <style type="text/css">
+         body {
+            background: rgb(184 196 209);
+            background: linear-gradient(90deg, rgb(206 210 213) 0%, rgb(223 255 230) 28%, #96c5cd 51%, rgb(203 199 199) 73%, rgb(178 177 209) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Book>
+
+@{
+    ViewData["Title"] = "showcart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double total = 0;
+    double dis = ViewBag.discount;
+    double rate = dis / 100;
+}
+
+<h4 class="display-4 text-info"><b><u class="mb-1">Online Book Store</u></b></h4>
+<p>Developed By: D.M. Arif Afsar</p>
+<p>Contact: 01951105948 </p>
+<p>Email: dm.sajin696@gmail.com </p>
+<p>Addess: 11/2 Housing Staff Quarter, Mirpur-14, Dhaka</p>
+<br/>
+<br/>
+
+
+<p><b>Customer Name   : </b> @ViewBag.cus</p>
+<p><b>BKash Number    : </b> @ViewBag.Bkash</p>
+<p><b>Email           : </b> @ViewBag.EA</p>
+<p><b>Shipping Address: </b> @ViewBag.sp</p>
+<p><b>Invoice No: </b> @ViewBag.INV</p>
+
+<table class="table border-left border-right table-hover">
+    <thead class="text-center bg-info table-hover table-active">
+        <tr>
+            <th>
+               @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publication)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Sub-Total
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class='text-center'>
+            <td class="text-info">
+                <b> @Html.DisplayFor(modelItem => item.BookName) </b>
+            </td>
+           
+            <td>
+                <img src="~/Books/@item.Image" style="width:160px; height:230px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publication)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td style="text-align:right">
+                    @{
+                        double subtotal = item.Price * item.Quantity.Value;
+                        total += subtotal;
+                    }
+                    @subtotal
+            </td>
+           
+        </tr>
+}
+<tr class="bg-info">
+    <td colspan="4"></td>
+    <td colspan="1"><b>TOTAL:</b></td>
+    <td colspan="1" >@total</td>
+</tr>
+<tr class="bg-info">
+    <td colspan="4"></td>
+    <td colspan="1"><b>Total After Discount:</b></td>
+    
+    <td colspan="1">
+                    @{
+                        double z = total*rate;
+                        double distotal = total - z;
+                    }
+                    @distotal
+        </td>
+</tr>
+
+    </tbody>
+</table>
+
+<button class="btn btn-danger" onclick="window.print()" >Download Invoice</button>
+<a class="btn btn-success" asp-controller="Home" asp-action="Index">Go Home</a>
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Book>
+
+@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Order</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Order" >
+            <label>Bkash Number:</label>
+            <input class="form-control" type="text" name="bkash" />
+            <label>Transaction No:</label>
+            <input class="form-control" type="text" name="trcode" />
+            <label>Shipping Address:</label>
+            <input class="form-control" type="text" name="SA" />
+            <button type="submit" asp-action="Order" >SUBMIT</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            
+        
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+﻿@model PracticumFinalOBS.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <h4 class="display-4 text-center text-info">@Model.BookName.ToUpper()</h4><br/><br/>
+    <div class="row">
+    <div class="col-md-4">
+        <img src="~/Books/@Model.Image" style="width:300px; height:450px;"/>
+    </div>
+    
+    <div class="col-md-8 text-white">
+        <p><b>Description:</b></p>
+         <p>@Model.BookDescription </p>
+        <p><b>Author:     </b></p>
+         <p>@Model.AuthorName </p>
+        <p><b>Genre:      </b></p>
+        @if(Model.Catagory==null)
+        {
+            <p>Unknown</p>
+        }
+        else
+        {
+            <p>@Model.Catagory.CatagoryName </p>
+        }
+        
+        <p><b>Price:      </b></p>
+         <p>@Model.Price BDT</p>
+        <p><b>Publication: </b> @Model.Publication</p>
+        
+        @if (Model.NOB > 0)
+        {
+         <p class="text-success"><b class="text-white">Availablity: </b> Available</p>
+        }
+        @if(Model.NOB==0)
+        {
+          <p class="text-danger"><b class="text-white">Availablity: </b> OUT OF STOCK</p>
+        }
+        
+       <br/>
+      
+
+           <a class="btn btn-info mr-4" asp-action="Index">Back to List</a>
+           <a class="btn btn-success ">Add To Cart</a>
+       
+    </div>
+    </div>
+
+    @section head{
+    <style type="text/css">
+        body {
+            background: rgb(49,137,228);
+            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;   
+        }
+    </style>
+}
+
+

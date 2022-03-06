@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PracticumFinalOBS.Models.Order>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cus = @Model.First();
+    double total = 0;
+    double discount = ViewBag.discount;
+}
+
+<h1 class="display-4 text-center">Order Details</h1>
+
+<br/><br/>
+<p><b>Customer Name: </b>@cus.Customer.CustomerName </p>
+<p><b>Bkash Number: </b>@cus.BkashNumber </p>
+<p><b>Shipping Address: </b>@cus.ShippingAddress </p>
+<p><b>Invoice No: </b>@cus.InvoiceNo </p>
+<br/>
+<table class="table">
+    <thead class="bg-info">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTotal)
+            </th>   
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor.VendorEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotal)
+                @{
+                    total +=  item.SubTotal;
+                 }
+            </td>   
+        </tr>
+}
+<tr class="bg-info">
+    <td colspan="2"></td>
+    <td colspan="1"><b>TOTAL:</b></td>
+    <td colspan="1" >@total</td>
+</tr>
+<tr class="bg-info">
+    <td colspan="2"></td>
+    <td colspan="1"><b>Total After Discount:</b></td>
+            <td colspan="1" >@{
+                   double z =  total - (total * (discount / 100));
+                }
+            @z    
+            </td>
+</tr>
+    </tbody>
+</table>
+
+<a class="btn btn-success" asp-controller="Sales" asp-action="Create" asp-route-invoice = "@cus.InvoiceNo">Payment Receieved</a>
+
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(184 196 209);
+            background: linear-gradient(179deg, rgb(206 210 213) 0%, rgb(223 255 230) 28%, #e5f8fb 51%, rgb(255 255 255) 73%, rgb(230 230 237) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

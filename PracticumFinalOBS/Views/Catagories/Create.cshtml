@@ -1,0 +1,54 @@
+﻿@model PracticumFinalOBS.Models.Catagory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4 class="text-center display-4">Add New Catagory</h4>
+<hr />
+<br/>
+<br/>
+<br/>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CatagoryName" class="control-label text-white"></label>
+                <input asp-for="CatagoryName" placeholder="Enter Catagory Name" class="form-control" />
+                <span asp-validation-for="CatagoryName" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success btn-sm form-control"/>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div>
+    <a asp-action="Index" class="btn btn-info">Existing Catagories</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@section head{
+    <style type="text/css">
+         body {
+           background: rgb(184 196 209);
+            background: linear-gradient(90deg, rgb(206 210 213) 0%, rgb(223 255 230) 28%, #96c5cd 51%, rgb(203 199 199) 73%, rgb(178 177 209) 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

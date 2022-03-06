@@ -1,0 +1,159 @@
+﻿@model PracticumFinalOBS.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>Create</h1>
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerEmail" class="control-label"></label>
+                <input asp-for="CustomerEmail" class="form-control" />
+                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPassword" class="control-label"></label>
+                <input asp-for="CustomerPassword" class="form-control" />
+                <span asp-validation-for="CustomerPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerDOB" class="control-label"></label>
+                <input asp-for="CustomerDOB" class="form-control" />
+                <span asp-validation-for="CustomerDOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerAddress" class="control-label"></label>
+                <input asp-for="CustomerAddress" class="form-control" />
+                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPhone" class="control-label"></label>
+                <input asp-for="CustomerPhone" class="form-control" />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+*@
+
+  <div class="container h-100">
+    
+     
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form asp-action="Create" class="mx-1 mx-md-4">
+                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerName" class="form-control" placeholder="Enter Name"/>
+                      <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerEmail" class="form-control" placeholder="Enter Email Addess"/>
+                      <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerPassword" class="form-control" placeholder="Enter your Password"/>
+                      <span asp-validation-for="CustomerPassword" class="text-danger"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="ConfirmPassword" class="form-control" placeholder="Re-Enter Your Password"/>
+                      <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-calendar-o fa-lg me-3 fa-fw" aria-hidden="true"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerDOB" class="form-control" placeholder="Date of Birth"/>
+                      <span asp-validation-for="CustomerDOB" class="text-danger"></span>
+                    </div>
+                  </div>
+                   <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-map-marker fa-lg me-3 fa-fw" aria-hidden="true"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerAddress" class="form-control" placeholder="Your Present Address."/>
+                      <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                    </div>
+                  </div>
+                   <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fa fa-phone-square fa-lg me-3 fa-fw" aria-hidden="true"></i>
+                    <div class="form-group flex-fill mb-0">
+                      <input asp-for="CustomerPhone" class="form-control" placeholder="Enter contact information"/>
+                      <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <input type="submit" value="Register" class="btn btn-info" />
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+  
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@section head{
+    <style type="text/css">
+         body {
+            /*background-image: url('/Backgrounds/RegBg.jpg');*/
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgb(1 72 68) 0%, rgb(23 27 68) 35%, #374a12 100%);
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

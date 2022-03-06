@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<h4 class="display-4 alert alert-info text-center" >Create A New Role</h4>
+<br/>
+<br/>
+<br/>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <p class="text-danger">@ViewBag.msg</p>
+        <br/>
+        <form asp-action="createrole" method="post">
+            <label class="text-white">Role Name:</label>
+            <input type="text" class="form-control" name="approle" placeholder="Enter a role you want to create....."/>
+            <br/>
+            <button class="btn btn-sm form-control btn-success" type="submit">Create Role</button>
+        </form>
+    </div>
+</div>
+
+@section head{
+    <style type="text/css">
+         body {
+            background-image: url('/Backgrounds/CreateRole.jpg');
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+}

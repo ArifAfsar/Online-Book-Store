@@ -1,0 +1,43 @@
+﻿@model PracticumFinalOBS.Models.Online
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="display-4 text-center text-white">@Model.Name</h4>
+<br/><br/>
+<div class="row">
+    <div class='col-md-10 offset-1'>
+     <object data="~/PDF/@Model.pdf" type="application/pdf"  width="900" height="900">
+    <iframe src="https://docs.google.com/viewer?url=~/PDF/@Model.pdf&embedded=true"></iframe>
+    </object>
+    </div>
+</div>
+@section head{
+    <style type="text/css">
+        body {
+            background: rgb(49,137,228);
+            background: linear-gradient(90deg, rgb(1 17 46) 0%, rgb(0 22 40) 28%, rgb(5 51 90) 51%, rgb(6 56 80) 73%, rgb(7 83 86) 100%);           
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;   
+        }
+    </style>
+}        
+@section zoom{
+    <style type="text/css">
+       .zoom {
+  
+  transition: transform .15s;
+ 
+  margin: 0 auto;
+}
+
+    .zoom:hover {
+     -ms-transform: scale(1.2); /* IE 9 */
+     -webkit-transform: scale(1.2); /* Safari 3-8 */
+     transform: scale(1.05); 
+}
+    </style>
+}
